@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS 
+  <link href="{{url_for('static', filename='style2.css')}}" type="text/css" rel="stylesheet"/>-->
+   
+
+  <title>Quiz Dashboard</title>
+</head>
+
+<body>
+    <main>
+  <div class="game-quiz-container">
+      {% for colors in colors.items %}
+    <div class="game-details-container">
+        <h1> Question : <span id="question-number"></span>{{colors.qno}}</h1>
+      </div>
+      <div class="game-question-container">
+          <h1 id="display-question">{{colors.question}}</h1>
+      </div>
+      <div class="game-options-container">
+        <div class="modal-container" id="option-modal">
+        <h1>Please Pick An Option</h1>
+          </div>
+          <span>
+        <input type="radio" id="option-one" name="option" class="radio" value="option A" />
+                    <label for="option-one" class="option" id="option-one-label">{{colors.option_1}}</label>
+                </span>
+          <span>
+                    <input type="radio" id="option-two" name="option" class="radio" value="option B" />
+                    <label for="option-two" class="option" id="option-two-label">{{colors.option_2}}</label>
+                </span>
+           <span>
+                    <input type="radio" id="option-three" name="option" class="radio" value="option C" />
+                    <label for="option-three" class="option" id="option-three-label">{{colors.option_3}}</label>
+                </span>
+          <span>
+                    <input type="radio" id="option-four" name="option" class="radio" value="option D" />
+                    <label for="option-four" class="option" id="option-four-label">{{colors.option_4}}</label>
+                </span>
+</div>
+      </div>
+        <div><a href='/open/{{colors.qno}}'><button>open</button></a></div>
+        <div>
+      {% endfor %}
+      {% for page_num in colors.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if colors.page == page_num %}
+          <a class="btn btn-info mb-4" href="{{ url_for('queshow', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('queshow', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+    </div>
+        
+    </main>
+    
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    </body>
+</html>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Montserrat', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+	background-image: url(https://uploads-ssl.webflow.com/59b64af7961d6200019cdf9e/59d7303d8976e40001596d22_test-bg-3.jpg)
+}
+    body{
+        background-image: url(https://uploads-ssl.webflow.com/59b64af7961d6200019cdf9e/59d7303d8976e40001596d22_test-bg-3.jpg)
+    }
+.work-with-us {
+  position: relative;
+  z-index: 3;
+  display: none;
+  height: 100%;
+  background-image: url("https://uploads-ssl.webflow.com/59b64af7961d6200019cdf9e/5a1ce3668802490001d42bd1_Work-with-us-OFF.jpg"), url("https://uploads-ssl.webflow.com/59b64af7961d6200019cdf9e/5a1ce5fb5c97d3000174aa55_Work-with-us-ON.jpg"), url("https://uploads-ssl.webflow.com/59b64af7961d6200019cdf9e/5a1cbc938802490001d415ac_Work-with-us-neon_room-off.jpg");
+  background-position: 50% 100%, 50% 100%, 50% 100%;
+  background-size: cover, cover, cover;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+}
+.work-with-us-holder {
+  position: relative;
+  height: 100%;
+}
+.work-with-us-new-section {
+  position: relative;
+  overflow: hidden;
+  height: 1200px;
+  margin-top: 0rem;
+}
+.work-with-us-new-parent {
+  position: relative;
+  z-index: 50;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1.5rem;
+  padding-left: 3rem;
+  float: none;
+  font-size: 19rem;
+  line-height: 19rem;
+  font-weight: 700;
+}
+.work-with-us-new-parent {
+    padding-left: 2rem;
+}
+.work-with-us {
+    height: 360px;
+}
+.work-with-us-new-section {
+    height: 800px;
+}
+
+</style>
+<script>
+    
+const questions = [
+    {
+        
+        option A:  "{{colors.option_1}}",
+        option B:  "{{colors.option_2}}",
+        option C:  "{{colors.option_3}}",
+        option D:  "{{colors.option_4}}"
+    }
+
+</script>
+
+<style>
+.w-webflow-badge {
+display:none !important;
+}
+</style><script>
+  $('.contact-details').on('click', '.contact-linkk', function() {
+    $('#questions-holder').addClass('show');
+  });
+
+  $('.closer-two').on('click', '.closer-x', function() {
+    $('#questions-holder').removeClass('show');
+  });
+</script>
+
+<style>
+.inner-wrap-1, .inner-wrap-1 canvas,
+.inner-wrap-2,
+.inner-wrap-3,
+.inner-wrap-4,
+.inner-wrap-5,
+.inner-wrap-6,
+.inner-wrap-7,
+.inner-wrap-8,
+{
+height: 100% !important;
+width: 100% !important;
+}
+
+    .game-quiz-container{
+    width: 40rem;
+    height: 30rem;
+    background-color: azure;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 30px;
+}
+
+.game-details-container{
+    width: 80%;
+    height: 4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.game-details-container h1{
+    font-size: 1.2rem;
+}
+
+.game-question-container{
+    width: 80%;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid darkgray;
+    border-radius: 25px;
+}
+
+.game-question-container h1{
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 3px;
+}
+
+.game-options-container{
+    width: 80%;
+    height: 12rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.game-options-container span{
+    width: 45%;
+    height: 3rem;
+    border: 2px solid darkgray;
+    border-radius: 20px;
+    overflow: hidden;
+}
+span label{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    font-weight: 600;
+    color: rgb(22, 22, 22);
+}
+
+span label:hover{
+    -ms-transform: scale(1.12);
+    -webkit-transform: scale(1.12);
+    transform: scale(1.12);
+    color: white;
+}
+
+input[type="radio"] {
+    position: relative;
+    display: none;
+}
+
+
+input[type=radio]:checked ~ .option {
+    background: paleturquoise;
+}
+    .next-button-container{
+    width: 50%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+}
+.next-button-container button{
+    width: 8rem;
+    height: 2rem;
+    border-radius: 10px;
+    background: none;
+    color: rgb(25, 25, 25);
+    font-weight: 600;
+    border: 2px solid gray;
+    cursor: pointer;
+    outline: none;
+}
+.next-button-container button:hover{
+    background-color: rgb(143, 93, 93);
+}
+
+.modal-container{
+    display: none;
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    -webkit-animation: fadeIn 1.2s ease-in-out;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+.modal-content-container{
+    height: 20rem;
+    width: 25rem;
+    background-color: rgb(43, 42, 42);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 25px;
+}
+
+.modal-content-container h1{
+    font-size: 1.3rem;
+    height: 3rem;
+    color: lightgray;
+    text-align: center;
+}
+
+.grade-details{
+    width: 15rem;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.grade-details p{
+    color: white;
+    text-align: center;
+}
+
+.modal-button-container{
+    height: 2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-button-container button{
+    width: 10rem;
+    height: 2rem;
+    background: none;
+    outline: none;
+    border: 1px solid rgb(252, 242, 241);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.modal-button-container button:hover{
+    background-color: rgb(83, 82, 82);
+}
+
+@media(min-width : 300px) and (max-width : 350px){
+    .game-quiz-container{
+        width: 90%;
+        height: 80vh;
+     }
+     .game-details-container h1{
+        font-size: 0.8rem;
+     }
+
+     .game-question-container{
+        height: 6rem;
+     }
+     .game-question-container h1{
+       font-size: 0.9rem;
+    }
+
+    .game-options-container span{
+        width: 90%;
+        height: 2.5rem;
+    }
+    .game-options-container span label{
+        font-size: 0.8rem;
+    }
+    .modal-content-container{
+        width: 90%;
+        height: 25rem;
+    }
+
+    .modal-content-container h1{
+        font-size: 1.2rem;
+    }
+}
+
+@media(min-width : 350px) and (max-width : 700px){
+   .game-quiz-container{
+       width: 90%;
+       height: 80vh;
+    }
+    .game-details-container h1{
+        font-size: 1rem;
+    }
+
+    .game-question-container{
+        height: 8rem;
+    }
+
+    .game-question-container h1{
+        font-size: 0.9rem;
+     }
+
+    .game-options-container span{
+        width: 90%;
+    }
+    .modal-content-container{
+        width: 90%;
+        height: 25rem;
+    }
+    .modal-content-container h1{
+        font-size: 1.2rem;
+    }
+}
+
+
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+</style>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1295275/webgl-hover_min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1295275/TweenMax.min.js"></script>
+
+<script>
+
+
+
+</script>
